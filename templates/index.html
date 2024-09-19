@@ -7,8 +7,15 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
+
+    <!-- Header section -->
+    <header>
+        Phishing Site Detector
+    </header>
+
+    <!-- White section (form) -->
     <div class="container mt-5">
-        <h1>Phishing Site Detector</h1>
+        <h1>Check URL for Phishing</h1>
         <form action="/" method="POST">
             <div class="mb-3">
                 <label for="url" class="form-label">Enter URL to Check</label>
@@ -20,5 +27,18 @@
         <div class="alert alert-danger mt-3">{{ error }}</div>
         {% endif %}
     </div>
+
+    <!-- Services section (dim blue) -->
+    <div class="services">
+        <h2>Our Services</h2>
+        <p>We provide phishing detection, URL validation, and security assessments for your web addresses.</p>
+        <p>Stay safe by checking websites before you visit them.</p>
+    </div>
+
+    <!-- Footer section -->
+    <footer>
+        © 2024 Phishing Site Detector. All rights reserved.
+    </footer>
+
 </body>
 </html>
