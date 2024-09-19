@@ -1,17 +1,18 @@
 body {
-    background-color: #002f6c;
+    background-color: #002f6c; /* Dim blue background color */
+    color: #ffffff; /* White text color for contrast */
     font-family: 'Roboto', sans-serif;
 }
 
 .container {
-    background-color: #ffffff;
+    background-color: #ffffff; /* White container background */
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
 }
 
 h1 {
-    color: #007bff;
+    color: #007bff; /* Bootstrap primary color for headings */
     margin-bottom: 20px;
 }
 
@@ -45,4 +46,3 @@ h1 {
     font-size: 1.2em;
     display: none;
 }
-
