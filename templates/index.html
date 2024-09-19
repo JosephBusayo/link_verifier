@@ -3,8 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Phishing Site Verification</title>
+    <title>URL Verification Result</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        #loading {
+            display: none;
+        }
+    </style>
 </head>
 <body>
     <div class="container mt-5">
@@ -14,12 +19,23 @@
             <div class="alert alert-danger" role="alert">
                 {{ message }}
             </div>
+            <a href="/" class="btn btn-secondary">Try Again</a>
         {% else %}
             <div class="alert alert-success" role="alert">
                 {{ message }}
             </div>
+            <form id="check-form" action="/result" method="POST">
+                <input type="hidden" name="url" value="{{ url }}">
+                <button type="submit" class="btn btn-primary">Check for Phishing</button>
+            </form>
+            <div id="loading" class="alert alert-info mt-3">Checking for phishing, please wait...</div>
         {% endif %}
-        <a href="/" class="btn btn-secondary">Check another URL</a>
     </div>
+
+    <script>
+        document.getElementById('check-form').addEventListener('submit', function() {
+            document.getElementById('loading').style.display = 'block';
+        });
+    </script>
 </body>
 </html>
