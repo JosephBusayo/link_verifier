@@ -124,11 +124,11 @@ input[type="text"]:focus {
 }
 
 .services h2 {
-    margin-bottom: 20px;
     font-size: 1.8em;
 }
 
 .services p {
+    margin-bottom:10px
     font-size: 1.2em;
 }
 
@@ -139,7 +139,7 @@ footer {
     text-align: center;
     padding: 10px;
     width: 100%;
-    margin-bottom:30px;
+    margin-bottom:0px;
     font-size: 0.9em;
     position: relative;
     bottom: 0;
