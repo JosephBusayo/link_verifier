@@ -5,51 +5,16 @@ import socket
 
 app = Flask(__name__)
 
-# AbuseIPDB API Key
+# AbuseIPDB API key
 ABUSEIPDB_API_KEY = '1f479be99eee3eec9ea045e73e29dfe4d2c5cdabdb9f80c499dfa6f84af614d09b93c16fe19226d0'
 
-# Known phishing URLs with detailed information
+# List of known phishing URLs for manual detection
 KNOWN_PHISHING_URLS = {
-    "http://paypal.com.verify-login-account.info": {
-        "phishing_message": "This is a known phishing site targeting PayPal users.",
-        "detailed_info": {
-            "Detected": "2023-06-15",
-            "Reason": "Phishing page mimicking PayPal login.",
-            "Threat Level": "High"
-        }
-    },
-    "https://secure-facebook-login.com": {
-        "phishing_message": "This is a known phishing site targeting Facebook users.",
-        "detailed_info": {
-            "Detected": "2023-07-20",
-            "Reason": "Fake Facebook login page to steal credentials.",
-            "Threat Level": "Critical"
-        }
-    },
-    "http://yourbank.support-login.com": {
-        "phishing_message": "This is a known phishing site targeting online banking users.",
-        "detailed_info": {
-            "Detected": "2023-05-10",
-            "Reason": "Phishing page imitating a bank's login page.",
-            "Threat Level": "High"
-        }
-    },
-    "http://apple.id.login.verification-secure.com": {
-        "phishing_message": "This is a known phishing site targeting Apple ID users.",
-        "detailed_info": {
-            "Detected": "2023-08-01",
-            "Reason": "Fake Apple ID verification page to steal credentials.",
-            "Threat Level": "Critical"
-        }
-    },
-    "http://amaz0n.billing-confirmation.net": {
-        "phishing_message": "This is a known phishing site targeting Amazon users.",
-        "detailed_info": {
-            "Detected": "2023-09-05",
-            "Reason": "Imitating Amazon billing confirmation to steal payment info.",
-            "Threat Level": "High"
-        }
-    }
+    "http://paypal.com.verify-login-account.info": "PayPal phishing site.",
+    "https://secure-facebook-login.com": "Facebook phishing site.",
+    "http://yourbank.support-login.com": "Bank login phishing site.",
+    "http://apple.id.login.verification-secure.com": "Apple ID phishing site.",
+    "http://amaz0n.billing-confirmation.net": "Amazon phishing site."
 }
 
 def get_ip_from_domain(domain):
@@ -77,22 +42,21 @@ def index():
     if request.method == 'POST':
         url = request.form['url']
 
-        # Step 1: Validate URL format
-        if not validators.url(url):
-            return render_template('index.html', error="Invalid URL format.")
-
-        # Step 2: Check if the URL is in the known phishing list
+        # Step 1: Check if URL is a known phishing site
         if url in KNOWN_PHISHING_URLS:
-            phishing_info = KNOWN_PHISHING_URLS[url]
+            phishing_message = KNOWN_PHISHING_URLS[url]
             return render_template(
                 'result.html',
                 url=url,
                 phishing=True,
-                phishing_message=phishing_info['phishing_message'],
-                detailed_info=phishing_info['detailed_info'],
-                ip_address=None,
-                abuse_data=None
+                phishing_message=phishing_message,
+                ip_address="N/A",  # No IP needed for known phishing URLs
+                abuse_data=None  # No abuse data check for known phishing URLs
             )
+
+        # Step 2: Validate URL format
+        if not validators.url(url):
+            return render_template('index.html', error="Invalid URL format.")
 
         # Step 3: Get IP address from domain
         domain = url.split('//')[-1].split('/')[0]  # Extract domain
@@ -103,9 +67,10 @@ def index():
         # Step 4: Check for abusive activity (using AbuseIPDB)
         abuse_data = check_abuse_ip(ip_address)
 
-        # Step 5: Display result to the user
+        # Step 5: Check for phishing traits (generic check for keywords)
         phishing, phishing_message = is_phishing(url)
 
+        # Step 6: Display result to the user
         return render_template(
             'result.html',
             url=url,
