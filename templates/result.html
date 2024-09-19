@@ -21,11 +21,18 @@
             </div>
         {% endif %}
 
+        <h2>URL Details</h2>
+        <p><strong>Creation Date:</strong> {{ url_details.creation_date }}</p>
+        <p><strong>Malicious Activity:</strong> {{ url_details.malicious_activity }}</p>
+        <p><strong>Owner:</strong> {{ url_details.owner }}</p>
+        <p><strong>Country:</strong> {{ url_details.country }}</p>
+        <p><strong>IP Address:</strong> {{ url_details.ip_address }}</p>
+
         <a href="/" class="btn btn-secondary">Check another URL</a>
     </div>
 
-    <!-- Common Section -->
-    <div class="services-section mt-5">
+    <!-- Additional Content -->
+    <div class="services-section">
         <h2>Our Services</h2>
         <p>We offer comprehensive phishing detection services to protect you from online threats. Our tools analyze websites for suspicious activity and provide detailed reports to help you make informed decisions.</p>
         <ul>
