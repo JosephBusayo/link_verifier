@@ -5,14 +5,19 @@ body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
-.content-container {
-    background-color: #ffffff; /* White background for content */
-    padding: 20px;
+.container {
+    background-color: #ffffff; /* White container background */
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 20px;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 800px;
+    flex: 1; /* Allows the container to grow and push the footer down */
 }
 
 h1 {
@@ -46,30 +51,24 @@ h1 {
     transition: background-color 0.3s ease;
 }
 
+/* Style for the loading indicator */
+#loading {
+    font-size: 1.2em;
+    display: none;
+}
+
+/* Style for the additional content */
 .services-section {
-    background-color: #002f6c; /* Dim blue background for the services section */
-    color: #ffffff; /* White text color for the services section */
+    background-color: #002f6c; /* Dim blue background */
+    color: #ffffff; /* White text */
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 20px;
+    text-align: center;
+    border-top: 1px solid #ffffff; /* Optional: adds a border to separate from content */
 }
 
-.services-section h2 {
-    color: #ffffff; /* White color for headings */
-    margin-bottom: 20px;
-}
-
-.services-section p {
-    font-size: 1.1em;
-    color: #ffffff; /* White text for readability */
-}
-
-.services-section ul {
-    list-style-type: disc;
-    padding-left: 20px;
-}
-
-.services-section ul li {
-    margin-bottom: 10px;
+footer {
+    background-color: #002f6c; /* Dim blue background */
+    color: #ffffff; /* White text */
+    padding: 20px;
+    text-align: center;
 }
