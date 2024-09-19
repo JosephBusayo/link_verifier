@@ -120,7 +120,7 @@ input[type="text"]:focus {
     color: #ffffff;
     padding: 20px 20px;
     text-align: center;
-    margin-top: 30px; /* Push it down from the content above */
+    margin-top: 10px; /* Push it down from the content above */
 }
 
 .services h2 {
