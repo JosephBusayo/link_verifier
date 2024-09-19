@@ -2,6 +2,7 @@ from flask import Flask, request, render_template
 import validators
 import requests
 import socket
+import time  # Import time module for introducing delays
 
 app = Flask(__name__)
 
@@ -20,9 +21,12 @@ KNOWN_PHISHING_URLS = {
 def get_ip_from_domain(domain):
     """Converts domain name to IP address."""
     try:
-        return socket.gethostbyname(domain)
-    except socket.gaierror:
-        return None
+        # Introduce a delay to simulate slow DNS resolution or check DNS issues
+        time.sleep(2)  # Wait for 2 seconds
+        ip_address = socket.gethostbyname(domain)
+        return ip_address
+    except socket.gaierror as e:
+        return None, str(e)  # Return error message along with None
 
 def check_abuse_ip(ip_address):
     """Checks the IP address using the AbuseIPDB API."""
@@ -31,10 +35,16 @@ def check_abuse_ip(ip_address):
         'Accept': 'application/json',
         'Key': ABUSEIPDB_API_KEY
     }
-    response = requests.get(url, headers=headers)
-    if response.status_code == 200:
-        return response.json()
-    return None
+    try:
+        # Introduce a delay to simulate slow API response
+        time.sleep(2)  # Wait for 2 seconds
+        response = requests.get(url, headers=headers)
+        if response.status_code == 200:
+            return response.json()
+        else:
+            return None, f"API returned status code {response.status_code}"
+    except requests.RequestException as e:
+        return None, str(e)  # Return error message if request fails
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -60,12 +70,14 @@ def index():
 
         # Step 3: Get IP address from domain
         domain = url.split('//')[-1].split('/')[0]  # Extract domain
-        ip_address = get_ip_from_domain(domain)
+        ip_address, error_message = get_ip_from_domain(domain)
         if not ip_address:
-            return render_template('index.html', error="Could not resolve the domain to an IP address.")
+            return render_template('index.html', error=f"Could not resolve the domain to an IP address. Error: {error_message}")
 
         # Step 4: Check for abusive activity (using AbuseIPDB)
-        abuse_data = check_abuse_ip(ip_address)
+        abuse_data, abuse_error = check_abuse_ip(ip_address)
+        if abuse_error:
+            return render_template('index.html', error=f"Error checking abuse data: {abuse_error}")
 
         # Step 5: Check for phishing traits (generic check for keywords)
         phishing, phishing_message = is_phishing(url)
