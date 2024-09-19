@@ -3,49 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index - Phishing Site Detector</title>
+    <title>Phishing Site Detector</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <div class="container mt-5">
         <h1>Phishing Site Detector</h1>
-        <p>URL: <strong>{{ url }}</strong></p>
-
-        {% if is_valid %}
-            <div class="alert alert-success" role="alert">
-                {{ message }}
+        <form action="/" method="POST">
+            <div class="mb-3">
+                <label for="url" class="form-label">Enter URL to Check</label>
+                <input type="text" class="form-control" id="url" name="url" placeholder="https://example.com">
             </div>
-            <h2>URL Details</h2>
-            <p><strong>Creation Date:</strong> {{ url_details.creation_date }}</p>
-            <p><strong>Malicious Activity:</strong> {{ url_details.malicious_activity }}</p>
-            <p><strong>Owner:</strong> {{ url_details.owner }}</p>
-            <p><strong>Country:</strong> {{ url_details.country }}</p>
-            <p><strong>IP Address:</strong> {{ url_details.ip_address }}</p>
-
-            <form action="/check" method="POST">
-                <div class="mb-3">
-                    <label for="url" class="form-label">Enter URL to Check Again</label>
-                    <input type="text" class="form-control" id="url" name="url" placeholder="https://example.com" required>
-                </div>
-                <button type="submit" class="btn btn-primary">Recheck</button>
-            </form>
-        {% else %}
-            <div class="alert alert-danger" role="alert">
-                {{ message }}
-            </div>
+            <button type="submit" class="btn btn-primary">Check</button>
+        </form>
+        {% if error %}
+        <div class="alert alert-danger mt-3">{{ error }}</div>
         {% endif %}
-    </div>
-
-    <!-- Additional Content -->
-    <div class="services-section">
-        <h2>Our Services</h2>
-        <p>We offer comprehensive phishing detection services to protect you from online threats. Our tools analyze websites for suspicious activity and provide detailed reports to help you make informed decisions.</p>
-        <ul>
-            <li>Real-time phishing detection</li>
-            <li>Detailed security analysis</li>
-            <li>Customizable alerts and notifications</li>
-            <li>Support and guidance from security experts</li>
-        </ul>
     </div>
 </body>
 </html>
