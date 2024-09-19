@@ -1,34 +1,66 @@
-/* Base styling */
+/* Global styles */
 body {
-    background-color: #002f6c; /* Dim blue background color */
+    background-color: #002f6c; /* Dim blue background */
     color: #ffffff; /* White text color for contrast */
     font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
+    min-height: 100vh;
 }
 
+/* Header section */
+header {
+    background-color: #002f6c; /* Dim blue header */
+    color: #ffffff;
+    padding: 20px 0;
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+/* Main container (for content) */
 .container {
-    background-color: #ffffff; /* White container background */
+    background-color: #ffffff; /* White background for top half */
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
     margin: 20px auto;
+    width: 80%;
     max-width: 800px;
-    flex: 1; /* Allows the container to grow and push the footer down */
 }
 
-h1 {
-    color: #007bff; /* Bootstrap primary color for headings */
+/* Services section (dim blue) */
+.services {
+    background-color: #002f6c; /* Dim blue background */
+    color: #ffffff;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.services h2 {
     margin-bottom: 20px;
+    font-size: 1.8em;
 }
 
-.alert {
-    margin-top: 20px;
+.services p {
+    font-size: 1.2em;
 }
 
+/* Footer */
+footer {
+    background-color: #001f4d; /* Slightly darker blue for footer */
+    color: #ffffff;
+    text-align: center;
+    padding: 10px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    font-size: 0.9em;
+}
+
+/* Button styles */
 .btn-primary {
     background-color: #007bff;
     border-color: #007bff;
@@ -51,24 +83,7 @@ h1 {
     transition: background-color 0.3s ease;
 }
 
-/* Style for the loading indicator */
 #loading {
     font-size: 1.2em;
     display: none;
-}
-
-/* Style for the additional content */
-.services-section {
-    background-color: #002f6c; /* Dim blue background */
-    color: #ffffff; /* White text */
-    padding: 20px;
-    text-align: center;
-    border-top: 1px solid #ffffff; /* Optional: adds a border to separate from content */
-}
-
-footer {
-    background-color: #002f6c; /* Dim blue background */
-    color: #ffffff; /* White text */
-    padding: 20px;
-    text-align: center;
 }
