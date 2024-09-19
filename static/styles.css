@@ -10,8 +10,9 @@ body {
     min-height: 100vh;
 }
 
+/* Header section */
 header {
-    background-color: #002f6c; /* Dim blue header */
+    background-color: #002f6c;
     color: #ffffff;
     padding: 20px 0;
     text-align: center;
@@ -19,6 +20,7 @@ header {
     font-weight: bold;
 }
 
+/* Container for the main content */
 .container {
     background-color: #ffffff; /* White container background */
     border-radius: 8px;
@@ -27,7 +29,8 @@ header {
     margin: 20px auto;
     width: 80%;
     max-width: 800px;
-    color: #002f6c; /* Text color inside white section */
+    color: #002f6c;
+    flex-grow: 1; /* This helps the container expand to take up available space */
 }
 
 h1 {
@@ -40,6 +43,7 @@ label {
     font-size: 1.1em;
 }
 
+/* Input field styling */
 input[type="text"] {
     width: 100%;
     padding: 12px;
@@ -58,6 +62,7 @@ input[type="text"]:focus {
     outline: none;
 }
 
+/* Button styling */
 .btn-primary {
     background-color: #007bff;
     border-color: #007bff;
@@ -73,6 +78,22 @@ input[type="text"]:focus {
     transition: background-color 0.3s ease;
 }
 
+/* Customization for the "Check another URL" button */
+.btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    padding: 12px 30px;
+    font-size: 1.1em;
+    margin-top: 20px;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+    border-color: #4e555b;
+    transition: background-color 0.3s ease;
+}
+
+/* Loader */
 #loading {
     font-size: 1.2em;
     display: none;
@@ -102,20 +123,8 @@ footer {
     color: #ffffff;
     text-align: center;
     padding: 10px;
-    position: absolute;
-    bottom: 0;
+    position: relative;
     width: 100%;
+    margin-top: auto;
     font-size: 0.9em;
-}
-
-/* Button styles */
-.btn-secondary {
-    background-color: #6c757d;
-    border-color: #6c757d;
-}
-
-.btn-secondary:hover {
-    background-color: #5a6268;
-    border-color: #4e555b;
-    transition: background-color 0.3s ease;
 }
