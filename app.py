@@ -1,66 +1,71 @@
 from flask import Flask, request, render_template
 import validators
 import requests
-from datetime import datetime
-import time
+import socket
 
 app = Flask(__name__)
 
-def is_phishing(url):
-    if not validators.url(url):
-        return False, "Invalid URL format."
-    
-    phishing_keywords = ['login', 'verify', 'secure', 'bank', 'account', 'password', 'paypal']
-    if any(keyword in url.lower() for keyword in phishing_keywords):
-        return True, "Suspicious keywords found."
+ABUSEIPDB_API_KEY = '1f479be99eee3eec9ea045e73e29dfe4d2c5cdabdb9f80c499dfa6f84af614d09b93c16fe19226d0'
 
+def get_ip_from_domain(domain):
+    """Converts domain name to IP address."""
     try:
-        response = requests.get(url, timeout=5)
-        if response.status_code != 200:
-            return True, "Website returned an unusual status."
-    except requests.exceptions.RequestException:
-        return True, "Unable to reach the website."
+        return socket.gethostbyname(domain)
+    except socket.gaierror:
+        return None
 
-    return False, "URL seems fine."
-
-def get_url_details(url):
-    # Dummy implementation for URL details
-    return {
-        'creation_date': 'Unknown',
-        'malicious_activity': 'None',
-        'owner': 'Unknown',
-        'country': 'Unknown',
-        'ip_address': 'Unknown'
+def check_abuse_ip(ip_address):
+    """Checks the IP address using the AbuseIPDB API."""
+    url = f'https://api.abuseipdb.com/api/v2/check?ipAddress={ip_address}&maxAgeInDays=90'
+    headers = {
+        'Accept': 'application/json',
+        'Key': ABUSEIPDB_API_KEY
     }
+    response = requests.get(url, headers=headers)
+    if response.status_code == 200:
+        return response.json()
+    return None
 
 @app.route('/', methods=['GET', 'POST'])
-def home():
+def index():
+    """Main route for phishing detection."""
     if request.method == 'POST':
         url = request.form['url']
-        is_valid, message = verify_url(url)
-        if is_valid:
-            return render_template('index.html', is_valid=is_valid, message=message, url=url, url_details=get_url_details(url))
-        else:
-            return render_template('index.html', is_valid=is_valid, message=message)
-    return render_template('home.html')
 
-def verify_url(url):
-    # Add your URL verification logic here
-    return True, "Valid URL format! Now performing phishing check..."
+        # Step 1: Validate URL format
+        if not validators.url(url):
+            return render_template('index.html', error="Invalid URL format.")
 
-@app.route('/check', methods=['POST'])
-def check_url():
-    url = request.form['url']
-    start_time = time.time()
-    phishing, message = is_phishing(url)
-    end_time = time.time()
+        # Step 2: Get IP address from domain
+        domain = url.split('//')[-1].split('/')[0]  # Extract domain
+        ip_address = get_ip_from_domain(domain)
+        if not ip_address:
+            return render_template('index.html', error="Could not resolve the domain to an IP address.")
 
-    duration = end_time - start_time
-    if duration > 120:  # Check if the process took longer than 2 minutes
-        message = "The phishing check took too long. Please try again later."
-        phishing = None
+        # Step 3: Check for abusive activity (using AbuseIPDB)
+        abuse_data = check_abuse_ip(ip_address)
 
-    return render_template('result.html', url=url, phishing=phishing, message=message, url_details=get_url_details(url))
+        # Step 4: Check for phishing traits
+        phishing, phishing_message = is_phishing(url)
+
+        # Step 5: Display result to the user
+        return render_template(
+            'result.html',
+            url=url,
+            phishing=phishing,
+            phishing_message=phishing_message,
+            ip_address=ip_address,
+            abuse_data=abuse_data
+        )
+
+    return render_template('index.html')
+
+def is_phishing(url):
+    """Simple phishing check based on keywords."""
+    phishing_keywords = ['login', 'secure', 'bank', 'password', 'verify', 'account']
+    if any(keyword in url.lower() for keyword in phishing_keywords):
+        return True, "Potential phishing website based on suspicious keywords."
+    return False, "URL does not appear to be a phishing site."
 
 if __name__ == '__main__':
     app.run(debug=True)
