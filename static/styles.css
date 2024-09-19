@@ -1,6 +1,6 @@
 /* Global styles */
 body {
-    background-color: #002f6c; /* Dim blue background */
+    background-color: #002f6c; /* Dim blue background color */
     color: #ffffff; /* White text color for contrast */
     font-family: 'Roboto', sans-serif;
     margin: 0;
@@ -10,33 +10,81 @@ body {
     min-height: 100vh;
 }
 
-/* Header section */
 header {
     background-color: #002f6c; /* Dim blue header */
     color: #ffffff;
     padding: 20px 0;
     text-align: center;
-    font-size: 1.5em;
+    font-size: 1.8em;
     font-weight: bold;
 }
 
-/* Main container (for content) */
 .container {
-    background-color: #ffffff; /* White background for top half */
+    background-color: #ffffff; /* White container background */
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
+    padding: 40px;
     margin: 20px auto;
     width: 80%;
     max-width: 800px;
+    color: #002f6c; /* Text color inside white section */
 }
 
-/* Services section (dim blue) */
+h1 {
+    color: #007bff; /* Bootstrap primary color for headings */
+    margin-bottom: 20px;
+}
+
+label {
+    color: #002f6c; /* Dark text color for labels */
+    font-size: 1.1em;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    display: inline-block;
+    border: 2px solid #007bff;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1.1em;
+    color: #002f6c;
+    background-color: #f9f9f9;
+}
+
+input[type="text"]:focus {
+    border-color: #0056b3;
+    outline: none;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1.1em;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+    transition: background-color 0.3s ease;
+}
+
+#loading {
+    font-size: 1.2em;
+    display: none;
+}
+
+/* Services section */
 .services {
     background-color: #002f6c; /* Dim blue background */
     color: #ffffff;
-    padding: 40px 20px;
+    padding: 60px 20px;
     text-align: center;
+    margin-top: 50px; /* Pushed down */
 }
 
 .services h2 {
@@ -48,30 +96,19 @@ header {
     font-size: 1.2em;
 }
 
-/* Footer */
+/* Footer section */
 footer {
     background-color: #001f4d; /* Slightly darker blue for footer */
     color: #ffffff;
     text-align: center;
     padding: 10px;
-    position: relative;
+    position: absolute;
     bottom: 0;
     width: 100%;
     font-size: 0.9em;
 }
 
 /* Button styles */
-.btn-primary {
-    background-color: #007bff;
-    border-color: #007bff;
-}
-
-.btn-primary:hover {
-    background-color: #0056b3;
-    border-color: #004085;
-    transition: background-color 0.3s ease;
-}
-
 .btn-secondary {
     background-color: #6c757d;
     border-color: #6c757d;
@@ -81,9 +118,4 @@ footer {
     background-color: #5a6268;
     border-color: #4e555b;
     transition: background-color 0.3s ease;
-}
-
-#loading {
-    font-size: 1.2em;
-    display: none;
 }
