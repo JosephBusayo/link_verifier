@@ -16,10 +16,16 @@
             </div>
             <button type="submit" class="btn btn-primary">Check</button>
         </form>
+
+        {% if message %}
+            <div class="alert {% if is_valid %}alert-success{% else %}alert-danger{% endif %}" role="alert">
+                {{ message }}
+            </div>
+        {% endif %}
     </div>
 
-    <!-- Common Section -->
-    <div class="services-section mt-5">
+    <!-- Additional Content -->
+    <div class="services-section">
         <h2>Our Services</h2>
         <p>We offer comprehensive phishing detection services to protect you from online threats. Our tools analyze websites for suspicious activity and provide detailed reports to help you make informed decisions.</p>
         <ul>
