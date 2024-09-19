@@ -17,27 +17,27 @@ ABUSEIPDB_API_KEY = '1f479be99eee3eec9ea045e73e29dfe4d2c5cdabdb9f80c499dfa6f84af
 KNOWN_PHISHING_URLS = {
     "paypal.com.verify-login-account.info": {
         "is_phishing": True,
-        "report": "This is a known PayPal phishing site. It attempts to trick users into entering their PayPal login credentials. The domain uses a subdomain structure to appear legitimate, but it's not an official PayPal domain. Never enter your credentials on this site.",
+        "report": "This URL appear to be a phishing site which is dangerous to use",
         "risk_score": 100
     },
     "secure-facebook-login.com": {
         "is_phishing": True,
-        "report": "This is a Facebook phishing site. It mimics the Facebook login page to steal user credentials. The domain name tries to appear secure, but it's not an official Facebook domain. Do not enter any information on this site.",
+        "report": "This URL appear to be a phishing site which is dangerous to use ",
         "risk_score": 95
     },
     "yourbank.support-login.com": {
         "is_phishing": True,
-        "report": "This is a generic bank phishing site. It may attempt to imitate various banking institutions. The use of 'support-login' in the domain is suspicious and not typical for legitimate bank websites. Avoid entering any banking information here.",
+        "report": "This URL appear to be a phishing site which is dangerous to use ",
         "risk_score": 90
     },
     "apple.id.login.verification-secure.com": {
         "is_phishing": True,
-        "report": "This site is impersonating Apple's login page. It uses multiple subdomains to appear legitimate, but it's not an official Apple domain. The site likely aims to steal Apple ID credentials. Do not enter your Apple ID or password on this site.",
+        "report": "This URL appear to be a phishing site which is dangerous to use.",
         "risk_score": 98
     },
     "amaz0n.billing-confirmation.net": {
         "is_phishing": True,
-        "report": "This is an Amazon phishing site. Note the use of '0' instead of 'o' in 'amaz0n', a common tactic in phishing URLs. The site may attempt to steal login credentials or financial information under the guise of a billing confirmation. Do not provide any information on this site.",
+        "report": "This  URL appear to be a phishing site which is dangerous to use",
         "risk_score": 97
     }
 }
