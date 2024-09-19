@@ -1,3 +1,4 @@
+/* Base styling */
 body {
     background-color: #002f6c; /* Dim blue background color */
     color: #ffffff; /* White text color for contrast */
@@ -42,7 +43,28 @@ h1 {
     transition: background-color 0.3s ease;
 }
 
-#loading {
-    font-size: 1.2em;
-    display: none;
+.services-section {
+    background-color: #f8f9fa; /* Light background for contrast */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.services-section h2 {
+    color: #007bff; /* Matching color for headings */
+    margin-bottom: 20px;
+}
+
+.services-section p {
+    font-size: 1.1em;
+    color: #333; /* Darker text for readability */
+}
+
+.services-section ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+.services-section ul li {
+    margin-bottom: 10px;
 }
