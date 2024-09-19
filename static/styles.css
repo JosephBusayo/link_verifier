@@ -118,7 +118,7 @@ input[type="text"]:focus {
 .services {
     background-color: #002f6c; /* Dim blue background */
     color: #ffffff;
-    padding: 40px 20px;
+    padding: 20px 20px;
     text-align: center;
     margin-top: 50px; /* Push it down from the content above */
 }
